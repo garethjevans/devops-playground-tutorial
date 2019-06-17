@@ -12,10 +12,22 @@ Twitter: https://twitter.com/garethbryncyn
 Github: https://github.com/garethjevans
 
 # Requirements
+
 * Google Cloud Shell
 * Basic Linux cli knowledge
+* Basic Git knowledge
+* Basic VI knowledge
 
 # Setup
+
+For this workshop we are going to utilise Google Cloud Shell to create our Jenkins X cluster on top of GKE.  We have two options available to us for getting access to Google Cloud Shell.
+
+## Option 1: Register for a GCP Trial account (Recommended)
+
+Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow the instructions at https://cloud.google.com/free/.
+
+## Option 2: 
+
 TODO
 
 * Hub CLI
