@@ -36,7 +36,7 @@ curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.230/jx-linux-amd6
 sudo mv jx /usr/local/bin
 ```
 
-# Create Cluster
+## Create Cluster
 
 Ensure you are logged in:
 ```
@@ -70,11 +70,15 @@ View all pods
 kubectl get pods
 ```
 
-Create an golang application
+## Create an Application
+
+Next we're going to use a `quickstart` to an application. To do this run the following:
 
 ```
-jx create quickstart -l Go
+jx create quickstart
 ```
+
+TODO add in selection options
 
 Watch the build logs
 
@@ -103,6 +107,9 @@ git push origin wip
 hub pull-request
 ```
 
+View Preview Environments:
+$ jx get preview
+
 ```
 $ jx get environments
 $ jx get pipelines
@@ -113,26 +120,34 @@ $ jx create quickstart -l Go
 $ jx get build logs -f <project-name>
 $ jx get activity -f <project-name>
 $ jx get applications
-Create a Pull Request for your application:
-$ git checkout -b my-branch
-$ git commit -am “message” && git push origin my-branch
-$ hub pull-request
-View Preview Environments:
-$ jx get preview
+
 Promote to production environment:
 $ jx get applications
 $ jx promote my-app --version 0.0.1 --env production
 
 Check whether the application was promoted:
 $ jx get applications
+```
 
-# Cleanup
+## Cleanup
 Delete the GKE cluster:
+
+```
 $ gcloud container clusters delete <cluster-name> --region europe-west1-b
+```
 Remove storage:
+
+```
 $ gsutil ls && gsutil -m rm -r gs://<cluster-name>-<bucket-name>
+```
 Remove service accounts:
+
+```
 $ gcloud iam service-accounts list && gcloud iam service-accounts delete <name>@<project>.iam.gserviceaccount.com
+```
+
 Cleanup the local configuration:
+
+```
 $ rm -rvf ~/.jx
 ```
