@@ -18,6 +18,16 @@ Github: https://github.com/garethjevans
 * Basic Git knowledge
 * Basic VI knowledge
 
+# Further Reading
+* GKE Documentation
+* Jenkins X Documentation - https://jenkins-x.io/documentation/
+* Jenkins X GitHub - https://github.com/jenkins-x
+* Tekton Documentation - https://github.com/tektoncd/pipeline/tree/master/docs
+* Prow - https://github.com/kubernetes/test-infra/tree/master/prow
+* Next Generation Pipeline - https://www.cloudbees.com/blog/move-toward-next-generation-pipelines
+* Serverless Jenkins with Jenkins X - https://medium.com/@jdrawlings/serverless-jenkins-with-jenkins-x-9134cbfe6870
+
+
 # Setup
 
 For this workshop we are going to utilise Google Cloud Shell to create our Jenkins X cluster on top of GKE.  We have two options available to us for getting access to Google Cloud Shell.
@@ -32,14 +42,11 @@ TODO
 
 * Hub CLI
 
-# Further Reading
-* GKE Documentation
-* Jenkins X Documentation - https://jenkins-x.io/documentation/
-* Jenkins X GitHub - https://github.com/jenkins-x
-* Tekton Documentation - https://github.com/tektoncd/pipeline/tree/master/docs
-* Prow - https://github.com/kubernetes/test-infra/tree/master/prow
-* Next Generation Pipeline - https://www.cloudbees.com/blog/move-toward-next-generation-pipelines
-* Serverless Jenkins with Jenkins X - https://medium.com/@jdrawlings/serverless-jenkins-with-jenkins-x-9134cbfe6870
+# Launch Cloud Shell
+
+Navigate to the Google Cloud Console at https://console.cloud.google.com/. Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen
+
+image here
 
 # Download Dependencies
 
