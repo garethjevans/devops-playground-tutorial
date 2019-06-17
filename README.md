@@ -18,6 +18,8 @@ Github: https://github.com/garethjevans
 # Setup
 TODO
 
+* Hub CLI
+
 # Further Reading
 * GKE Documentation
 * Jenkins X Documentation - https://jenkins-x.io/documentation/
@@ -80,6 +82,26 @@ Watch the build logs
 jx get build logs
 ```
 
+Make a change to the application
+
+Install the HUB Cli
+
+TODO need instructions for CloudShell
+
+```
+brew install hub
+hub version
+```
+
+```
+cd <application>
+git checkout -b wip
+vi main.go
+git add -A
+git commit -m "feat: updated welcome message"
+git push origin wip
+hub pull-request
+```
 
 ```
 $ jx get environments
