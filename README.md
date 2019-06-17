@@ -44,9 +44,9 @@ TODO
 
 # Launch Cloud Shell
 
-Navigate to the Google Cloud Console at https://console.cloud.google.com/. Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen
+Navigate to the Google Cloud Console at https://console.cloud.google.com/. Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen.
 
-image here
+![Activate Cloud Shell](/images/startcloudshell1.png)
 
 # Download Dependencies
 
