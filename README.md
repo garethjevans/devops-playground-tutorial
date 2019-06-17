@@ -7,7 +7,7 @@ Role: Principal Software Engineer, Cloudbees
 
 Email: gevans@cloudbees.com
 
-Titter: garethbryncyn
+Twitter: https://twitter.com/garethbryncyn
 
 Github: https://github.com/garethjevans
 
