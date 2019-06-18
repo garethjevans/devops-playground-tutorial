@@ -48,6 +48,10 @@ Navigate to the Google Cloud Console at https://console.cloud.google.com/. Once 
 
 ![Activate Cloud Shell](/images/startcloudshell1.png)
 
+This may take a few minutes if this is the first time you've launched cloudshell. Once complete, you should see the following terminal:
+
+![Cloud Shell Terminal](/images/startcloudshell2.png)
+
 # Download Dependencies
 
 ```
