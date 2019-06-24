@@ -22,8 +22,8 @@ Github: [garethjevans](https://github.com/garethjevans)
 * GKE Documentation
 * [Jenkins X Documentation](https://jenkins-x.io/documentation/)
 * [Jenkins X GitHub](https://github.com/jenkins-x)
-* [Tekton Documentation](https://github.com/tektoncd/pipeline/tree/master/docs)
-* [Prow] - https://github.com/kubernetes/test-infra/tree/master/prow)
+* [Tekton](https://github.com/tektoncd/pipeline/tree/master/docs)
+* [Prow](https://github.com/kubernetes/test-infra/tree/master/prow)
 * [Next Generation Pipeline](https://www.cloudbees.com/blog/move-toward-next-generation-pipelines)
 * [Serverless Jenkins with Jenkins X](https://medium.com/@jdrawlings/serverless-jenkins-with-jenkins-x-9134cbfe6870)
 
