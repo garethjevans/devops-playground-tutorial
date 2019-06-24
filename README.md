@@ -7,9 +7,9 @@ Role: Principal Software Engineer, Cloudbees
 
 Email: gevans@cloudbees.com
 
-Twitter: https://twitter.com/garethbryncyn
+Twitter: [garethbryncyn](https://twitter.com/garethbryncyn)
 
-Github: https://github.com/garethjevans
+Github: [garethjevans](https://github.com/garethjevans)
 
 # Requirements
 
@@ -20,12 +20,12 @@ Github: https://github.com/garethjevans
 
 # Further Reading
 * GKE Documentation
-* Jenkins X Documentation - https://jenkins-x.io/documentation/
-* Jenkins X GitHub - https://github.com/jenkins-x
-* Tekton Documentation - https://github.com/tektoncd/pipeline/tree/master/docs
-* Prow - https://github.com/kubernetes/test-infra/tree/master/prow
-* Next Generation Pipeline - https://www.cloudbees.com/blog/move-toward-next-generation-pipelines
-* Serverless Jenkins with Jenkins X - https://medium.com/@jdrawlings/serverless-jenkins-with-jenkins-x-9134cbfe6870
+* [Jenkins X Documentation](https://jenkins-x.io/documentation/)
+* [Jenkins X GitHub](https://github.com/jenkins-x)
+* [Tekton Documentation](https://github.com/tektoncd/pipeline/tree/master/docs)
+* [Prow] - https://github.com/kubernetes/test-infra/tree/master/prow)
+* [Next Generation Pipeline](https://www.cloudbees.com/blog/move-toward-next-generation-pipelines)
+* [Serverless Jenkins with Jenkins X](https://medium.com/@jdrawlings/serverless-jenkins-with-jenkins-x-9134cbfe6870)
 
 
 # Setup
@@ -34,7 +34,7 @@ For this workshop we are going to utilise Google Cloud Shell to create our Jenki
 
 ## Option 1: Register for a GCP Trial account (Recommended)
 
-Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow the instructions at https://cloud.google.com/free/.
+Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow [these instructions](https://cloud.google.com/free/).
 
 ## Option 2: 
 
@@ -44,7 +44,7 @@ TODO
 
 # Launch Cloud Shell
 
-Navigate to the Google Cloud Console at https://console.cloud.google.com/. Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen.
+Navigate to the [Google Cloud Console](https://console.cloud.google.com/). Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen.
 
 ![Activate Cloud Shell](/images/startcloudshell1.png)
 
