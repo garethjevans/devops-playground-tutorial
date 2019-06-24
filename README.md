@@ -54,9 +54,18 @@ This may take a few minutes if this is the first time you've launched cloudshell
 
 # Download Dependencies
 
+All of the required dependencies for this workshop will be downloaded & installed directly into Google Cloud Shell.
+
 ```
 curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.230/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin
+```
+
+Check that the `jx` binary is correctly installed
+
+```
+jx --version
+$ 2.0.230
 ```
 
 ## Create Cluster
