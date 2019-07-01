@@ -107,7 +107,31 @@ It can take around 5 minutes to create the cluster, once this has completed the 
 
 When prompted for the domain, select the default.
 
+Vault configuration options, select the defaults:
+
+```
+Exposing Vault...
+? Expose type Ingress
+? Domain: <ip address>.nip.io
+? UrlTemplate (press <Enter> to keep the current value): 
+? Using config values { <ip address>.nip.io  false Ingress  false}, ok? Yes
+```
+
+When prompted for the github credetials, enter your github username:
+
+```
+Creating a local Git user for GitHub server
+? GitHub username: <my gh user>
+To be able to create a repository on GitHub we need an API Token
+Please click this URL https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo
+
+Then COPY the token and enter in into the form below:
+
+? API Token: ****************************************
+```
+
 Select the JX namespace
+
 ```
 jx ns jx
 ```
