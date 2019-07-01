@@ -322,24 +322,18 @@ gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
 
 ## Make a change to the application
 
-Install the HUB Cli
+```
+gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git checkout -b wip
+Switched to a new branch 'wip'
+gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ vi main.go
+gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git add main.go
+gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git commit -m "feat: updated welcome message"
+[wip 596f22a] feat: updated welcome message
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git push origin wip
+```
 
-TODO need instructions for CloudShell
-
-```
-brew install hub
-hub version
-```
-
-```
-cd <application>
-git checkout -b wip
-vi main.go
-git add -A
-git commit -m "feat: updated welcome message"
-git push origin wip
-hub pull-request
-```
+Create the pull request
 
 View Preview Environments:
 $ jx get preview
