@@ -227,11 +227,16 @@ dev          jx              Development   Never               https://github.co
 production   jx-production   Permanent     Manual      200     https://github.com/garethjevans-test/environment-gevans01-production.git   master
 staging      jx-staging      Permanent     Auto        100     https://github.com/garethjevans-test/environment-gevans01-staging.git      master
 ```
-Summary
+
+### What Just Happened?
+
 
 * Created a kubernetes cluster on GKE
 * Configured & Installed Jenkins X using GitOps
 * Create two environments (Staging & Production)
+* Configured Vault for secret storage
+* Using tektoncd for the pipeline execution engine
+** No Jenkins CI
 
 ## Create an Application
 
@@ -241,7 +246,54 @@ Next we're going to use a `quickstart` to an application. To do this run the fol
 jx create quickstart
 ```
 
-TODO add in selection options
+e.g.
+
+```
+Using Git provider GitHub at https://github.com
+? Do you wish to use garethjevans-bot as the Git user name? Yes
+
+
+About to create repository  on server https://github.com with user garethjevans-bot
+? Which organisation do you want to use? garethjevans-test
+? Enter the new repository name:  gevans01-test
+
+
+Creating repository garethjevans-test/gevans01-test
+? select the quickstart you wish to create golang-http
+Generated quickstart at /home/gevans/gevans01-test
+### NO charts folder /home/gevans/gevans01-test/charts/golang-http
+Created project at /home/gevans/gevans01-test
+
+The directory /home/gevans/gevans01-test is not yet using git
+? Would you like to initialise git now? Yes
+? Commit message:  Initial import
+
+Git repository created
+performing pack detection in folder /home/gevans/gevans01-test
+--> Draft detected Go (65.746753%)
+selected pack: /home/gevans/.jx/draft/packs/github.com/jenkins-x-buildpacks/jenkins-x-kubernetes/packs/go
+
+replacing placeholders in directory /home/gevans/gevans01-test
+app name: gevans01-test, git server: github.com, org: garethjevans-test, Docker registry org: jenkins-x-workshop
+skipping directory "/home/gevans/gevans01-test/.git"
+Pushed Git repository to https://github.com/garethjevans-test/gevans01-test
+Creating GitHub webhook for garethjevans-test/gevans01-test for url http://hook.jx.35.187.10.136.nip.io/hook
+Watch pipeline activity via:    jx get activity -f gevans01-test -w
+Browse the pipeline log via:    jx get build logs garethjevans-test/gevans01-test/master
+You can list the pipelines via: jx get pipelines
+When the pipeline is complete:  jx get applications
+For more help on available commands see: https://jenkins-x.io/developing/browsing/
+Note that your first pipeline may take a few minutes to start while the necessary images get downloaded!
+```
+
+### What Just Happened?
+
+* Created a new source repository on GitHub
+* Used code generation to create a new project
+* Used language detection to select an appropriate buildpack for the project
+* Configured a PR & master pipeline for that project
+* Kicked off an initial master build
+* Automatically pushed the application into the staging environment
 
 Watch the build logs
 
@@ -249,7 +301,26 @@ Watch the build logs
 jx get build logs
 ```
 
-Make a change to the application
+If nothing is listed, try manually invoking the build with:
+
+```
+jx start pipeline
+```
+
+View the application
+
+```
+jx get applications
+```
+
+e.g.
+
+```
+APPLICATION   STAGING PODS URL
+gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
+```
+
+## Make a change to the application
 
 Install the HUB Cli
 
