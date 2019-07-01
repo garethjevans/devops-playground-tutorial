@@ -105,6 +105,8 @@ It can take around 5 minutes to create the cluster, once this has completed the 
 // TODO validate if any apis need be created on a completely fresh project (cloud resource manager)
 ```
 
+When prompted for the domain, select the default.
+
 Select the JX namespace
 ```
 jx ns jx
