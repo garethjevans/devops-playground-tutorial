@@ -75,14 +75,34 @@ Ensure you are logged in:
 $ gcloud auth login
 ```
 
-Select the shared project, if you don’t have enough credit:
+If you are using the shared project, if you don’t have enough credit:
 ```
-$ gcloud config set project jenkins-x-workshop-242909
+$ gcloud config set project jenkins-x-workshop
 ```
 
 Create a new GKE cluster and install Jenkins X:
 ```
 $ jx create cluster gke --ng --skip-login -n my-name
+```
+
+* If you are prompted for the GKE project, select the `jenkins-x-workshop`
+* Select the zone that is nearest - I'd suggest one of the `europe-west` zones
+
+We will default a number of options, to override this, use the `--advanced` flag when creating the cluster.
+
+```
+Defaulting to machine type: n1-standard-2
+Defaulting to minimum number of nodes: 3
+Defaulting to maxiumum number of nodes: 5
+Defaulting use of preemptible VMs: No
+Defaulting access to Google Cloud Storage / Google Container Registry: Yes
+Defaulting enabling Cloud Build, Container Registry & Container Analysis API's: Yes
+```
+
+It can take around 5 minutes to create the cluster, once this has completed the installation process will automatically kick in.
+
+```
+// TODO validate if any apis need be created on a completely fresh project (cloud resource manager)
 ```
 
 Select the JX namespace
