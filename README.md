@@ -130,6 +130,16 @@ Then COPY the token and enter in into the form below:
 ? API Token: ****************************************
 ```
 
+When prompted to select which workload pack to use, select `Kubernetes Workloads`
+
+```
+? Pick default workload build pack:   [Use arrows to move, space to select, type to filter]
+> Kubernetes Workloads: Automated CI+CD with GitOps Promotion
+  Library Workloads: CI+Release but no CD
+```
+
+When prompted for the environment information, select the defaults.
+
 Select the JX namespace
 
 ```
@@ -142,11 +152,86 @@ View all deployments
 $ kubectl get deployments
 ```
 
+e.g.
+
+```
+NAME                           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+crier                          1         1         1            1           6m21s
+deck                           2         2         2            2           6m21s
+hook                           2         2         2            2           6m21s
+horologium                     1         1         1            1           6m21s
+jenkins-x-chartmuseum          1         1         1            1           6m26s
+jenkins-x-controllerbuild      1         1         1            1           6m26s
+jenkins-x-controllerrole       1         1         1            1           6m26s
+jenkins-x-controllerteam       1         1         1            1           6m25s
+jenkins-x-docker-registry      1         1         1            1           6m25s
+jenkins-x-heapster             1         1         1            1           6m25s
+jenkins-x-nexus                1         1         1            1           6m24s
+jx-vault-gevans01-configurer   1         1         1            1           19m
+pipeline                       1         1         1            1           6m20s
+pipelinerunner                 1         1         1            1           6m20s
+plank                          1         1         1            1           6m19s
+sinker                         1         1         1            1           6m18s
+tekton-pipelines-controller    1         1         1            1           6m17s
+tekton-pipelines-webhook       1         1         1            1           6m17s
+tide                           1         1         1            1           6m18s
+vault-operator                 1         1         1            1           20m
+```
+
 View all pods
 
 ```
 kubectl get pods
 ```
+
+e.g. 
+
+```
+NAME                                            READY   STATUS    RESTARTS   AGE
+crier-749f96fb4d-7kqbp                          1/1     Running   0          5m42s
+deck-696f77d746-jgrt6                           1/1     Running   0          5m42s
+deck-696f77d746-l222d                           1/1     Running   0          5m42s
+hook-6d9859bb47-qgnjz                           1/1     Running   0          5m42s
+hook-6d9859bb47-x4xd6                           1/1     Running   0          5m42s
+horologium-6bc57b5f9-ffgq5                      1/1     Running   0          5m41s
+jenkins-x-chartmuseum-75d45b6d7f-dxsq8          1/1     Running   0          5m48s
+jenkins-x-controllerbuild-6ddb75f89d-ms6s6      1/1     Running   0          5m47s
+jenkins-x-controllerrole-5b6d489775-crtp6       1/1     Running   0          5m46s
+jenkins-x-controllerteam-6c67c985cd-dkc6p       1/1     Running   0          5m46s
+jenkins-x-docker-registry-6d555974c7-kxx7l      1/1     Running   0          5m47s
+jenkins-x-heapster-6586795784-cx8rl             2/2     Running   0          3m36s
+jenkins-x-nexus-6ccd45c57c-k2gtl                1/1     Running   0          5m46s
+jx-vault-gevans01-0                             3/3     Running   0          18m
+jx-vault-gevans01-configurer-6b67bfff5c-45gh5   1/1     Running   0          18m
+pipeline-5f85b8df5b-ft56g                       1/1     Running   0          5m41s
+pipelinerunner-5546ffd8b-56n4g                  1/1     Running   0          5m40s
+plank-8849d9d67-4tbbh                           1/1     Running   0          5m40s
+sinker-85ff54bd9b-csrkb                         1/1     Running   0          5m39s
+tekton-pipelines-controller-687cfbcc89-wkf24    1/1     Running   0          5m39s
+tekton-pipelines-webhook-7fd7f8cdcc-5f9rn       1/1     Running   0          5m38s
+tide-5f8fb5964c-mpx5f                           1/1     Running   0          5m39s
+vault-operator-55885856f8-kwz9d                 1/1     Running   0          19m
+```
+
+View the Environments
+
+```
+kubectl get env
+```
+
+e.g.
+ 
+```
+NAME         NAMESPACE       KIND          PROMOTION   ORDER   GIT URL                                                                    GIT BRANCH
+dev          jx              Development   Never               https://github.com/garethjevans-test/environment-gevans01-dev.git          master
+production   jx-production   Permanent     Manual      200     https://github.com/garethjevans-test/environment-gevans01-production.git   master
+staging      jx-staging      Permanent     Auto        100     https://github.com/garethjevans-test/environment-gevans01-staging.git      master
+```
+Summary
+
+* Created a kubernetes cluster on GKE
+* Configured & Installed Jenkins X using GitOps
+* Create two environments (Staging & Production)
 
 ## Create an Application
 
