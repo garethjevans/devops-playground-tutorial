@@ -31,17 +31,15 @@ Github: [garethjevans](https://github.com/garethjevans)
 
 For this workshop we are going to utilise Google Cloud Shell to create our Jenkins X cluster on top of GKE.  We have two options available to us for getting access to Google Cloud Shell.
 
-## Option 1: Register for a GCP Trial account (Recommended)
+## Option 1: Use the devops playground sandbox account
+
+Use the DevOps playground sandbox account.
+
+## Option 2: Register for a GCP Trial account (Recommended)
 
 Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow [these instructions](https://cloud.google.com/free/).
 
-## Option 2: Use the devops playground sandbox account
-
-TODO
-
-* Hub CLI
-
-# Launch Cloud Shell
+### Launch Cloud Shell
 
 Navigate to the [Google Cloud Console](https://console.cloud.google.com/). Once you have logged in, click on the Activate Cloud Shell button in the top right of the screen.
 
@@ -51,7 +49,7 @@ This may take a few minutes if this is the first time you've launched cloudshell
 
 ![Cloud Shell Terminal](/images/startcloudshell2.png)
 
-# Download Dependencies
+### Download Dependencies
 
 All of the required dependencies for this workshop will be downloaded & installed directly into Google Cloud Shell.
 
@@ -78,12 +76,12 @@ $ gcloud auth login
 
 If you are using the shared project, if you don’t have enough credit:
 ```
-$ gcloud config set project jenkins-x-workshop
+$ gcloud config set project u8cel62va-gcp-sandpit-803790 
 ```
 
 Create a new GKE cluster and install Jenkins X:
 ```
-$ jx create cluster gke --ng --vault=false --kaniko=true --skip-login -n my-name
+$ jx create cluster gke --tekton --vault=false --kaniko --skip-login -n my-name
 ```
 
 * If you are prompted for the GKE project, select the `u8cel62va-gcp-sandpit-803790`
@@ -114,16 +112,6 @@ Select Jenkins installation type: Serverless Jenkins X Pipelines with Tekton
 
 When prompted for the domain, select the default.
 
-Vault configuration options, select the defaults:
-
-```
-Exposing Vault...
-? Expose type Ingress
-? Domain: <ip address>.nip.io
-? UrlTemplate (press <Enter> to keep the current value): 
-? Using config values { <ip address>.nip.io  false Ingress  false}, ok? Yes
-```
-
 When prompted for the github credetials, enter your github username:
 
 https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo
@@ -137,14 +125,6 @@ Please click this URL https://github.com/settings/tokens/new?scopes=repo,read:us
 Then COPY the token and enter in into the form below:
 
 ? API Token: ****************************************
-```
-
-When prompted to select which workload pack to use, select `Kubernetes Workloads`
-
-```
-? Pick default workload build pack:   [Use arrows to move, space to select, type to filter]
-> Kubernetes Workloads: Automated CI+CD with GitOps Promotion
-  Library Workloads: CI+Release but no CD
 ```
 
 When prompted for the environment information, select the defaults.
@@ -243,7 +223,6 @@ staging      jx-staging      Permanent     Auto        100     https://github.co
 * Created a kubernetes cluster on GKE
 * Configured & Installed Jenkins X using GitOps
 * Create two environments (Staging & Production)
-* Configured Vault for secret storage
 * Using tektoncd for the pipeline execution engine
 ** No Jenkins CI
 
