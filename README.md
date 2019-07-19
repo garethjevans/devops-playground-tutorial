@@ -13,7 +13,6 @@ Github: [garethjevans](https://github.com/garethjevans)
 
 # Requirements
 
-* Google Cloud Shell
 * Basic Linux cli knowledge
 * Basic Git knowledge
 * Basic VI knowledge
@@ -36,7 +35,7 @@ For this workshop we are going to utilise Google Cloud Shell to create our Jenki
 
 Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow [these instructions](https://cloud.google.com/free/).
 
-## Option 2: 
+## Option 2: Use the devops playground sandbox account
 
 TODO
 
@@ -56,8 +55,10 @@ This may take a few minutes if this is the first time you've launched cloudshell
 
 All of the required dependencies for this workshop will be downloaded & installed directly into Google Cloud Shell.
 
+If you are using the Devops Playground sandbox account, you can skip this step.
+
 ```
-curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.230/jx-linux-amd64.tar.gz | tar xzv
+curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.474/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin
 ```
 
@@ -65,7 +66,7 @@ Check that the `jx` binary is correctly installed
 
 ```
 jx --version
-$ 2.0.230
+$ 2.0.474
 ```
 
 ## Create Cluster
@@ -85,7 +86,7 @@ Create a new GKE cluster and install Jenkins X:
 $ jx create cluster gke --ng --skip-login -n my-name
 ```
 
-* If you are prompted for the GKE project, select the `jenkins-x-workshop`
+* If you are prompted for the GKE project, select the `u8cel62va-gcp-sandpit-803790`
 * Select the zone that is nearest - I'd suggest one of the `europe-west` zones
 
 We will default a number of options, to override this, use the `--advanced` flag when creating the cluster.
@@ -97,13 +98,10 @@ Defaulting to maxiumum number of nodes: 5
 Defaulting use of preemptible VMs: No
 Defaulting access to Google Cloud Storage / Google Container Registry: Yes
 Defaulting enabling Cloud Build, Container Registry & Container Analysis API's: Yes
+Defaulting enabling Kaniko for building container images: No
 ```
 
 It can take around 5 minutes to create the cluster, once this has completed the installation process will automatically kick in.
-
-```
-// TODO validate if any apis need be created on a completely fresh project (cloud resource manager)
-```
 
 When prompted for the domain, select the default.
 
