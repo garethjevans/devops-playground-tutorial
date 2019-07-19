@@ -83,7 +83,7 @@ $ gcloud config set project jenkins-x-workshop
 
 Create a new GKE cluster and install Jenkins X:
 ```
-$ jx create cluster gke --ng --skip-login -n my-name
+$ jx create cluster gke --ng --vault=false --kaniko=true --skip-login -n my-name
 ```
 
 * If you are prompted for the GKE project, select the `u8cel62va-gcp-sandpit-803790`
@@ -103,6 +103,15 @@ Defaulting enabling Kaniko for building container images: No
 
 It can take around 5 minutes to create the cluster, once this has completed the installation process will automatically kick in.
 
+```
+Select Jenkins installation type: Serverless Jenkins X Pipelines with Tekton
+```
+
+```
+? Please enter the name you wish to use with git:  Gareth Evans
+? Please enter the email address you wish to use with git:  gareth@bryncynfelin.co.uk
+```
+
 When prompted for the domain, select the default.
 
 Vault configuration options, select the defaults:
@@ -116,6 +125,8 @@ Exposing Vault...
 ```
 
 When prompted for the github credetials, enter your github username:
+
+https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo
 
 ```
 Creating a local Git user for GitHub server
