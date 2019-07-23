@@ -66,7 +66,7 @@ All of the required dependencies for this workshop will be downloaded & installe
 If you are using the Devops Playground sandbox account, you can skip this step.
 
 ```
-curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.474/jx-linux-amd64.tar.gz | tar xzv
+curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.500/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin
 ```
 
@@ -74,7 +74,7 @@ Check that the `jx` binary is correctly installed
 
 ```
 jx --version
-$ 2.0.474
+$ 2.0.500
 ```
 ## Create a Github Access Token
 
