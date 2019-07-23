@@ -23,6 +23,7 @@ On this meetup, we will walk you through creating a Jenkins X cluster on GKE, cr
 
 # Requirements
 
+* A GitHub account
 * Basic Linux cli knowledge
 * Basic Git knowledge
 * Basic VI knowledge
