@@ -1,31 +1,25 @@
-   * [Introduction](#introduction)
-   * [Requirements](#requirements)
-   * [Further Reading](#further-reading)
-   * [Setup](#setup)
-      * [Option 1: Use the devops playground sandbox account](#option-1-use-the-devops-playground-sandbox-account)
-      * [Option 2: Register for a GCP Trial account](#option-2-register-for-a-gcp-trial-account-recommended)
-         * [Launch Cloud Shell](#launch-cloud-shell)
-         * [Download Dependencies](#download-dependencies)
-      * [Create a Github Access Token](#create-a-github-access-token)
-   * [Create Cluster](#create-cluster)
-         * [What Just Happened?](#what-just-happened)
-      * [Create an Application](#create-an-application)
-         * [What Just Happened?](#what-just-happened-1)
-      * [Make a change to the application](#make-a-change-to-the-application)
-   * [Cleanup](#cleanup)
-
 # Introduction
 On this meetup, we will walk you through creating a Jenkins X cluster on GKE, creating an application using a Jenkins X quickstart, pushing the application into a staging environment.
 
-Name: Gareth Evans
-
-Role: Principal Software Engineer, Cloudbees
-
-Email: gevans@cloudbees.com
-
-Twitter: [garethbryncyn](https://twitter.com/garethbryncyn)
-
-Github: [garethjevans](https://github.com/garethjevans)
+* [Requirements](#requirements)
+* [Further Reading](#further-reading)
+* [Setup](#setup)
+  * [Option 1: Use the devops playground sandbox account](#option-1-use-the-devops-playground-sandbox-account)
+  * [Option 2: Register for a GCP Trial account](#option-2-register-for-a-gcp-trial-account)
+    * [Launch Cloud Shell](#launch-cloud-shell)
+    * [Download Dependencies](#download-dependencies)
+  * [Create a Github Access Token](#create-a-github-access-token)
+* [Create Cluster](#create-cluster)
+  * [What Just Happened?](#what-just-happened)
+* [Create an Application](#create-an-application)
+  * [What Just Happened?](#what-just-happened-1)
+  * [Watch the build logs](#watch-the-build-logs)
+  * [View the application](#view-the-application)
+* [Make a change to the application](#make-a-change-to-the-application)
+  * [Watch the build logs](#watch-the-build-logs-1)
+  * [View Preview Environments](#view-preview-environments)
+  * [Other useful commands](#other-useful-commands)
+* [Cleanup](#cleanup)
 
 # Requirements
 
@@ -239,7 +233,7 @@ production   jx-production   Permanent     Manual      200     https://github.co
 staging      jx-staging      Permanent     Auto        100     https://github.com/garethjevans-test/environment-gevans01-staging.git      master
 ```
 
-### What Just Happened?
+## What Just Happened?
 
 * Created a kubernetes cluster on GKE
 * Configured & Installed Jenkins X using GitOps
@@ -304,7 +298,7 @@ Note that your first pipeline may take a few minutes to start while the necessar
 * Kicked off an initial master build
 * Automatically pushed the application into the staging environment
 
-Watch the build logs
+## Watch the build logs
 
 ```
 jx get build logs
@@ -316,7 +310,7 @@ If nothing is listed, try manually invoking the build with:
 jx start pipeline
 ```
 
-View the application
+## View the application
 
 ```
 jx get applications
@@ -346,10 +340,12 @@ $ jx create pr
 jx get build logs
 ```
 
-## View Preview Environments:
+## View Preview Environments
+```
 $ jx get preview
+```
 
-## Other useful commands:
+## Other useful commands
 
 ```
 $ jx get environments
