@@ -3,7 +3,7 @@
    * [Further Reading](#further-reading)
    * [Setup](#setup)
       * [Option 1: Use the devops playground sandbox account](#option-1-use-the-devops-playground-sandbox-account)
-      * [Option 2: Register for a GCP Trial account (Recommended)](#option-2-register-for-a-gcp-trial-account-recommended)
+      * [Option 2: Register for a GCP Trial account](#option-2-register-for-a-gcp-trial-account-recommended)
          * [Launch Cloud Shell](#launch-cloud-shell)
          * [Download Dependencies](#download-dependencies)
       * [Create a Github Access Token](#create-a-github-access-token)
@@ -51,7 +51,7 @@ For this workshop we are going to use a Devops Playground sandbox VM to access G
 
 Use the DevOps playground sandbox account.
 
-## Option 2: Register for a GCP Trial account (Recommended)
+## Option 2: Register for a GCP Trial account
 
 Google offer a trial account with $300 of free credit.  You will require a Credit / Debit card to sign up but this will not be charged.  To sign up follow [these instructions](https://cloud.google.com/free/).
 
@@ -241,12 +241,11 @@ staging      jx-staging      Permanent     Auto        100     https://github.co
 
 ### What Just Happened?
 
-
 * Created a kubernetes cluster on GKE
 * Configured & Installed Jenkins X using GitOps
 * Create two environments (Staging & Production)
 * Using tektoncd for the pipeline execution engine
-** No Jenkins CI
+* No Jenkins CI
 
 # Create an Application
 
