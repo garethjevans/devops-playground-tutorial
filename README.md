@@ -1,3 +1,19 @@
+   * [Introduction](#introduction)
+   * [Requirements](#requirements)
+   * [Further Reading](#further-reading)
+   * [Setup](#setup)
+      * [Option 1: Use the devops playground sandbox account](#option-1-use-the-devops-playground-sandbox-account)
+      * [Option 2: Register for a GCP Trial account (Recommended)](#option-2-register-for-a-gcp-trial-account-recommended)
+         * [Launch Cloud Shell](#launch-cloud-shell)
+         * [Download Dependencies](#download-dependencies)
+      * [Create a Github Access Token](#create-a-github-access-token)
+   * [Create Cluster](#create-cluster)
+         * [What Just Happened?](#what-just-happened)
+      * [Create an Application](#create-an-application)
+         * [What Just Happened?](#what-just-happened-1)
+      * [Make a change to the application](#make-a-change-to-the-application)
+   * [Cleanup](#cleanup)
+
 # Introduction
 On this meetup, we will walk you through creating a Jenkins X cluster on GKE, creating an application using a Jenkins X quickstart, pushing the application into a staging environment.
 
@@ -29,7 +45,7 @@ Github: [garethjevans](https://github.com/garethjevans)
 
 # Setup
 
-For this workshop we are going to utilise Google Cloud Shell to create our Jenkins X cluster on top of GKE.  We have two options available to us for getting access to Google Cloud Shell.
+For this workshop we are going to use a Devops Playground sandbox VM to access GKE, but feel free to use your own GCP account if you'd prefer.
 
 ## Option 1: Use the devops playground sandbox account
 
@@ -66,22 +82,34 @@ Check that the `jx` binary is correctly installed
 jx --version
 $ 2.0.474
 ```
+## Create a Github Access Token
 
-## Create Cluster
+Navigate to (https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo), Give the token a name and save this somewhere safe.  We will rmremove the token at the end of the workshop.
+
+# Create Cluster
 
 Ensure you are logged in:
+
 ```
 $ gcloud auth login
 ```
 
 If you are using the shared project, if you don’t have enough credit:
+
 ```
 $ gcloud config set project u8cel62va-gcp-sandpit-803790 
 ```
 
-Create a new GKE cluster and install Jenkins X:
+Create a new empty GKE cluster:
+
 ```
-$ jx create cluster gke --tekton --vault=false --kaniko --skip-login -n my-name
+$ jx create cluster gke --skip-installation --skip-login -n <your name>
+```
+
+e.g.
+
+```
+$ jx create cluster gke --skip-installation --skip-login -n user01
 ```
 
 * If you are prompted for the GKE project, select the `u8cel62va-gcp-sandpit-803790`
@@ -99,11 +127,13 @@ Defaulting enabling Cloud Build, Container Registry & Container Analysis API's: 
 Defaulting enabling Kaniko for building container images: No
 ```
 
-It can take around 5 minutes to create the cluster, once this has completed the installation process will automatically kick in.
+It can take around 5 minutes to create the cluster, once this has completed we can launch the `jx boot` process:
 
 ```
-Select Jenkins installation type: Serverless Jenkins X Pipelines with Tekton
+jx boot
 ```
+
+Configure your gitconfig file
 
 ```
 ? Please enter the name you wish to use with git:  Gareth Evans
@@ -113,8 +143,6 @@ Select Jenkins installation type: Serverless Jenkins X Pipelines with Tekton
 When prompted for the domain, select the default.
 
 When prompted for the github credetials, enter your github username:
-
-https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo
 
 ```
 Creating a local Git user for GitHub server
@@ -156,7 +184,6 @@ jenkins-x-controllerteam       1         1         1            1           6m25
 jenkins-x-docker-registry      1         1         1            1           6m25s
 jenkins-x-heapster             1         1         1            1           6m25s
 jenkins-x-nexus                1         1         1            1           6m24s
-jx-vault-gevans01-configurer   1         1         1            1           19m
 pipeline                       1         1         1            1           6m20s
 pipelinerunner                 1         1         1            1           6m20s
 plank                          1         1         1            1           6m19s
@@ -164,7 +191,6 @@ sinker                         1         1         1            1           6m18
 tekton-pipelines-controller    1         1         1            1           6m17s
 tekton-pipelines-webhook       1         1         1            1           6m17s
 tide                           1         1         1            1           6m18s
-vault-operator                 1         1         1            1           20m
 ```
 
 View all pods
@@ -190,16 +216,12 @@ jenkins-x-controllerteam-6c67c985cd-dkc6p       1/1     Running   0          5m4
 jenkins-x-docker-registry-6d555974c7-kxx7l      1/1     Running   0          5m47s
 jenkins-x-heapster-6586795784-cx8rl             2/2     Running   0          3m36s
 jenkins-x-nexus-6ccd45c57c-k2gtl                1/1     Running   0          5m46s
-jx-vault-gevans01-0                             3/3     Running   0          18m
-jx-vault-gevans01-configurer-6b67bfff5c-45gh5   1/1     Running   0          18m
 pipeline-5f85b8df5b-ft56g                       1/1     Running   0          5m41s
 pipelinerunner-5546ffd8b-56n4g                  1/1     Running   0          5m40s
 plank-8849d9d67-4tbbh                           1/1     Running   0          5m40s
-sinker-85ff54bd9b-csrkb                         1/1     Running   0          5m39s
 tekton-pipelines-controller-687cfbcc89-wkf24    1/1     Running   0          5m39s
 tekton-pipelines-webhook-7fd7f8cdcc-5f9rn       1/1     Running   0          5m38s
 tide-5f8fb5964c-mpx5f                           1/1     Running   0          5m39s
-vault-operator-55885856f8-kwz9d                 1/1     Running   0          19m
 ```
 
 View the Environments
@@ -226,7 +248,7 @@ staging      jx-staging      Permanent     Auto        100     https://github.co
 * Using tektoncd for the pipeline execution engine
 ** No Jenkins CI
 
-## Create an Application
+# Create an Application
 
 Next we're going to use a `quickstart` to an application. To do this run the following:
 
@@ -274,7 +296,7 @@ For more help on available commands see: https://jenkins-x.io/developing/browsin
 Note that your first pipeline may take a few minutes to start while the necessary images get downloaded!
 ```
 
-### What Just Happened?
+## What Just Happened?
 
 * Created a new source repository on GitHub
 * Used code generation to create a new project
@@ -308,23 +330,27 @@ APPLICATION   STAGING PODS URL
 gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
 ```
 
-## Make a change to the application
+# Make a change to the application
 
 ```
-gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git checkout -b wip
-Switched to a new branch 'wip'
-gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ vi main.go
-gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git add main.go
-gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git commit -m "feat: updated welcome message"
-[wip 596f22a] feat: updated welcome message
- 1 file changed, 1 insertion(+), 1 deletion(-)
-gevans@cloudshell:~/gevans01-test (jenkins-x-workshop)$ git push origin wip
+$ git checkout -b wip
+$ vi main.go
+$ git add main.go
+$ git commit -m "feat: updated welcome message"
+$ git push origin wip
+$ jx create pr
 ```
 
-Create the pull request
+## Watch the build logs
 
-View Preview Environments:
+```
+jx get build logs
+```
+
+## View Preview Environments:
 $ jx get preview
+
+## Other useful commands:
 
 ```
 $ jx get environments
@@ -336,16 +362,11 @@ $ jx create quickstart -l Go
 $ jx get build logs -f <project-name>
 $ jx get activity -f <project-name>
 $ jx get applications
-
-Promote to production environment:
-$ jx get applications
 $ jx promote my-app --version 0.0.1 --env production
-
-Check whether the application was promoted:
-$ jx get applications
 ```
 
-## Cleanup
+# Cleanup
+
 Delete the GKE cluster:
 
 ```
@@ -367,3 +388,5 @@ Cleanup the local configuration:
 ```
 $ rm -rvf ~/.jx
 ```
+
+You can also run the `jx gc gke` command to generate a script to clean up unused resources.
