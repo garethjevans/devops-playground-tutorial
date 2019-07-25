@@ -393,3 +393,9 @@ $ rm -rvf ~/.jx
 ```
 
 *NOTE: You can also run the `jx gc gke` command to generate a script to clean up unused resources.*
+
+# 9. For More Information
+
+The Jenkins-X team can be found on the Kubernetes slack channels, you can get your invite from https://kubernetes.slack.com/, we are on the channels #jenkins-x-dev & #jenkins-x-user.
+
+Alternatively, Oscar sends out a fantastic bi-weekly newsletter about Jenkins X containing tips, tricks and early insight to new features - please sign up at https://jenkins-x.io/community/ 
