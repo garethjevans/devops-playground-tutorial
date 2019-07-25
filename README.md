@@ -82,7 +82,7 @@ $ 2.0.500
 
 # 0. Create a Github Access Token
 
-Navigate to (https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo), Give the token a name and save this somewhere safe.  We will rmremove the token at the end of the workshop.
+Navigate to (https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo), Give the token a name and save this somewhere safe.  We will remove the token at the end of the workshop.
 
 # 1. Create Cluster
 
