@@ -8,18 +8,21 @@ On this meetup, we will walk you through creating a Jenkins X cluster on GKE, cr
   * [Option 2: Register for a GCP Trial account](#option-2-register-for-a-gcp-trial-account)
     * [Launch Cloud Shell](#launch-cloud-shell)
     * [Download Dependencies](#download-dependencies)
-  * [Create a Github Access Token](#create-a-github-access-token)
-* [Create Cluster](#create-cluster)
-  * [What Just Happened?](#what-just-happened)
-* [Create an Application](#create-an-application)
-  * [What Just Happened?](#what-just-happened-1)
+* [0. Create a Github Access Token](#create-a-github-access-token)
+* [1. Create Cluster](#create-cluster)
+* [2. Install Jenkins X](#install-jenkins-x)
+* [3. Look under the Hood](#look-under-the-hood)
+* [4. What Just Happened?](#what-just-happened)
+* [5. Create an Application](#create-an-application)
   * [Watch the build logs](#watch-the-build-logs)
   * [View the application](#view-the-application)
-* [Make a change to the application](#make-a-change-to-the-application)
+  * [What Just Happened?](#what-just-happened-1)
+* [6. Make a change to the application](#make-a-change-to-the-application)
   * [Watch the build logs](#watch-the-build-logs-1)
   * [View Preview Environments](#view-preview-environments)
   * [Other useful commands](#other-useful-commands)
-* [Cleanup](#cleanup)
+* [7. Useful command](#useful-commands)
+* [8. Cleanup](#cleanup)
 
 # Requirements
 
@@ -320,7 +323,7 @@ APPLICATION   STAGING PODS URL
 gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
 ```
 
-# 6. What Just Happened?
+## What Just Happened?
 
 * Created a new source repository on GitHub
 * Used code generation to create a new project
@@ -329,7 +332,7 @@ gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
 * Kicked off an initial master build
 * Automatically pushed the application into the staging environment
 
-# 7. Make a change to the application
+# 6. Make a change to the application
 
 ```bash
 $ git checkout -b wip
@@ -351,7 +354,7 @@ jx get build logs
 $ jx get preview
 ```
 
-# 8. Useful commands
+# 7. Useful commands
 
 ```bash
 $ jx get environments
@@ -366,7 +369,7 @@ $ jx get applications
 $ jx promote my-app --version 0.0.1 --env production
 ```
 
-# 9. Cleanup
+# 8. Cleanup
 
 Delete the GKE cluster (_the cluster-name is the user value you applied in the first step_):
 
