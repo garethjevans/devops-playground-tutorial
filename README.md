@@ -29,7 +29,7 @@ On this meetup, we will walk you through creating a Jenkins X cluster on GKE, cr
 * Basic VI knowledge
 
 # Further Reading
-* GKE Documentation
+* [GKE Documentation](https://cloud.google.com/kubernetes-engine/docs/)
 * [Jenkins X Documentation](https://jenkins-x.io/documentation/)
 * [Jenkins X GitHub](https://github.com/jenkins-x)
 * [Tekton](https://github.com/tektoncd/pipeline/tree/master/docs)
@@ -66,44 +66,45 @@ All of the required dependencies for this workshop will be downloaded & installe
 
 If you are using the Devops Playground sandbox account, you can skip this step.
 
-```
+```bash
 curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.500/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin
 ```
 
 Check that the `jx` binary is correctly installed
 
-```
+```bash
 jx --version
 $ 2.0.500
 ```
-## Create a Github Access Token
+
+# 0. Create a Github Access Token
 
 Navigate to (https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo), Give the token a name and save this somewhere safe.  We will rmremove the token at the end of the workshop.
 
-# Create Cluster
+# 1. Create Cluster
 
 Ensure you are logged in:
 
-```
+```bash
 $ gcloud auth login
 ```
 
 If you are using the shared project, if you don’t have enough credit:
 
-```
+```bash
 $ gcloud config set project u8cel62va-gcp-sandpit-803790 
 ```
 
 Create a new empty GKE cluster:
 
-```
+```bash
 $ jx create cluster gke --skip-installation --skip-login -n <your name>
 ```
 
 e.g.
 
-```
+```bash
 $ jx create cluster gke --skip-installation --skip-login -n user01
 ```
 
@@ -112,7 +113,7 @@ $ jx create cluster gke --skip-installation --skip-login -n user01
 
 We will default a number of options, to override this, use the `--advanced` flag when creating the cluster.
 
-```
+```bash
 Defaulting to machine type: n1-standard-2
 Defaulting to minimum number of nodes: 3
 Defaulting to maxiumum number of nodes: 5
@@ -124,13 +125,15 @@ Defaulting enabling Kaniko for building container images: No
 
 It can take around 5 minutes to create the cluster, once this has completed we can launch the `jx boot` process:
 
-```
+# 2. Install Jenkins X
+
+```bash
 jx boot
 ```
 
 Configure your gitconfig file
 
-```
+```bash
 ? Please enter the name you wish to use with git:  Gareth Evans
 ? Please enter the email address you wish to use with git:  gareth@bryncynfelin.co.uk
 ```
@@ -139,7 +142,7 @@ When prompted for the domain, select the default.
 
 When prompted for the github credetials, enter your github username:
 
-```
+```bash
 Creating a local Git user for GitHub server
 ? GitHub username: <my gh user>
 To be able to create a repository on GitHub we need an API Token
@@ -152,21 +155,23 @@ Then COPY the token and enter in into the form below:
 
 When prompted for the environment information, select the defaults.
 
+# 3. Look under the Hood
+
 Select the JX namespace
 
-```
+```bash
 jx ns jx
 ```
 
 View all deployments
 
-```
+```bash
 $ kubectl get deployments
 ```
 
 e.g.
 
-```
+```bash
 NAME                           DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 crier                          1         1         1            1           6m21s
 deck                           2         2         2            2           6m21s
@@ -190,13 +195,13 @@ tide                           1         1         1            1           6m18
 
 View all pods
 
-```
+```bash
 kubectl get pods
 ```
 
 e.g. 
 
-```
+```bash
 NAME                                            READY   STATUS    RESTARTS   AGE
 crier-749f96fb4d-7kqbp                          1/1     Running   0          5m42s
 deck-696f77d746-jgrt6                           1/1     Running   0          5m42s
@@ -221,20 +226,20 @@ tide-5f8fb5964c-mpx5f                           1/1     Running   0          5m3
 
 View the Environments
 
-```
+```bash
 kubectl get env
 ```
 
 e.g.
  
-```
+```bash
 NAME         NAMESPACE       KIND          PROMOTION   ORDER   GIT URL                                                                    GIT BRANCH
 dev          jx              Development   Never               https://github.com/garethjevans-test/environment-gevans01-dev.git          master
 production   jx-production   Permanent     Manual      200     https://github.com/garethjevans-test/environment-gevans01-production.git   master
 staging      jx-staging      Permanent     Auto        100     https://github.com/garethjevans-test/environment-gevans01-staging.git      master
 ```
 
-## What Just Happened?
+# 4. What Just Happened?
 
 * Created a kubernetes cluster on GKE
 * Configured & Installed Jenkins X using GitOps
@@ -242,17 +247,17 @@ staging      jx-staging      Permanent     Auto        100     https://github.co
 * Using tektoncd for the pipeline execution engine
 * No Jenkins CI
 
-# Create an Application
+# 5. Create an Application
 
 Next we're going to use a `quickstart` to an application. To do this run the following:
 
-```
+```bash
 jx create quickstart
 ```
 
 e.g.
 
-```
+```bash
 Using Git provider GitHub at https://github.com
 ? Do you wish to use garethjevans-bot as the Git user name? Yes
 
@@ -290,7 +295,32 @@ For more help on available commands see: https://jenkins-x.io/developing/browsin
 Note that your first pipeline may take a few minutes to start while the necessary images get downloaded!
 ```
 
-## What Just Happened?
+## Watch the build logs
+
+```bash
+jx get build logs
+```
+
+If nothing is listed, try manually invoking the build with:
+
+```bash
+jx start pipeline
+```
+
+## View the application
+
+```bash
+jx get applications
+```
+
+e.g.
+
+```bash
+APPLICATION   STAGING PODS URL
+gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
+```
+
+# 6. What Just Happened?
 
 * Created a new source repository on GitHub
 * Used code generation to create a new project
@@ -299,34 +329,9 @@ Note that your first pipeline may take a few minutes to start while the necessar
 * Kicked off an initial master build
 * Automatically pushed the application into the staging environment
 
-## Watch the build logs
+# 7. Make a change to the application
 
-```
-jx get build logs
-```
-
-If nothing is listed, try manually invoking the build with:
-
-```
-jx start pipeline
-```
-
-## View the application
-
-```
-jx get applications
-```
-
-e.g.
-
-```
-APPLICATION   STAGING PODS URL
-gevans01-test 0.0.2   1/1  http://gevans01-test.jx-staging.35.187.10.136.nip.io
-```
-
-# Make a change to the application
-
-```
+```bash
 $ git checkout -b wip
 $ vi main.go
 $ git add main.go
@@ -337,18 +342,18 @@ $ jx create pr
 
 ## Watch the build logs
 
-```
+```bash
 jx get build logs
 ```
 
 ## View Preview Environments
-```
+```bash
 $ jx get preview
 ```
 
-## Other useful commands
+# 8. Useful commands
 
-```
+```bash
 $ jx get environments
 $ jx get pipelines
 $ jx start pipeline
@@ -361,28 +366,28 @@ $ jx get applications
 $ jx promote my-app --version 0.0.1 --env production
 ```
 
-# Cleanup
+# 9. Cleanup
 
-Delete the GKE cluster:
+Delete the GKE cluster (_the cluster-name is the user value you applied in the first step_):
 
-```
+```bash
 $ gcloud container clusters delete <cluster-name> --region europe-west1-b
 ```
 Remove storage:
 
-```
+```bash
 $ gsutil ls && gsutil -m rm -r gs://<cluster-name>-<bucket-name>
 ```
 Remove service accounts:
 
-```
+```bash
 $ gcloud iam service-accounts list && gcloud iam service-accounts delete <name>@<project>.iam.gserviceaccount.com
 ```
 
 Cleanup the local configuration:
 
-```
+```bash
 $ rm -rvf ~/.jx
 ```
 
-You can also run the `jx gc gke` command to generate a script to clean up unused resources.
+*NOTE: You can also run the `jx gc gke` command to generate a script to clean up unused resources.*
